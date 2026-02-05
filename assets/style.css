@@ -1,0 +1,144 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+body {
+    background: #1e1f26;
+    color: #ddd;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    background: linear-gradient(180deg, #2a2d3a, #232533);
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 25px;
+    border-bottom: 1px solid #2f3244;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.nav-menu {
+    display: flex;
+    gap: 18px;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #cfd2ff;
+    font-size: 14px;
+    opacity: 0.85;
+    transition: 0.2s;
+}
+
+.nav-menu a:hover {
+    opacity: 1;
+    color: #fff;
+}
+
+/* ================= RIGHT SIDE ================= */
+
+.nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search-box input {
+    background: #1c1e2a;
+    border: 1px solid #2f3244;
+    padding: 6px 10px;
+    border-radius: 4px;
+    color: #fff;
+    outline: none;
+}
+
+.search-box input::placeholder {
+    color: #888;
+}
+
+/* ================= USER ================= */
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+}
+
+.user-box img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.user-name {
+    font-size: 13px;
+    color: #fff;
+}
+
+/* ================= DROPDOWN ================= */
+
+.dropdown {
+    position: absolute;
+    top: 45px;
+    right: 0;
+    background: #2a2d3a;
+    border: 1px solid #2f3244;
+    border-radius: 6px;
+    width: 170px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.dropdown a {
+    padding: 10px 12px;
+    font-size: 13px;
+    color: #cfd2ff;
+    text-decoration: none;
+}
+
+.dropdown a:hover {
+    background: #34385a;
+    color: #fff;
+}
+
+.user-box:hover .dropdown {
+    display: flex;
+}
+
+/* ================= LOGIN BUTTON ================= */
+
+.login-btn {
+    background: #5865F2;
+    color: #fff;
+    padding: 7px 14px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.login-btn:hover {
+    background: #4752c4;
+}
