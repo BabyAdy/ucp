@@ -33,7 +33,7 @@ if (isset($_SESSION['discord_id'])) {
 <h2>Updates</h2>
 
 <h2>Discord</h2>
-<iframe src="https://discord.com/widget?id=SERVER_ID&theme=dark"
+<iframe src="https://discord.com/widget?id=1328138189239746672&theme=dark"
 width="350" height="500"></iframe>
 
 <h2>Staff Logs</h2>
@@ -41,4 +41,3 @@ width="350" height="500"></iframe>
 
 </body>
 </html>
-    
