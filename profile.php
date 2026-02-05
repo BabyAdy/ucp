@@ -53,18 +53,31 @@ if ($user['admin_level'] > 0) {
 /* HELPER */
 if ($user['helper_level'] > 0) {
     $helperBadges = [
-        3 => ['🧑‍🏫', 'Head Helper', 'helper'],
+        3 => ['🧑‍🏫', 'Head Helper', 'headhelper'],
         2 => ['🧑‍🏫', 'Helper', 'helper'],
-        1 => ['🧪', 'Trial Helper', 'helper']
+        1 => ['🧪', 'Trial Helper', 'trialhelper']
     ];
 
     [$emoji, $text, $class] = $helperBadges[$user['helper_level']];
     echo "<span class='badge $class'>$emoji $text</span>";
 }
 
-/* FACTION LEADER */
+/* LEADER */
 if ($user['faction_rank'] == 7) {
-    echo "<span class='badge leader'>👑 Leader of ".getFactionName($user['faction_id'])."</span>";
+    $factionBadges = [
+        1 => ['🚓', 'lspd', 'Leader of Los Santos Police Department'],
+        2 => ['⭐', 'sheriff', 'Leader of Sheriff Department'],
+        3 => ['🚑', 'pfd', 'Leader of Paramedic & Fire Department'],
+        4 => ['🎯', 'hitman', 'Leader of Hitman Agency'],
+        5 => ['🍀', 'grove', 'Leader of Grove Street Families'],
+        6 => ['💜', 'ballas', 'Leader of Ballas'],
+        7 => ['💛', 'vagos', 'Leader of Los Santos Vagos'],
+        8 => ['🔵', 'aztecas', 'Leader of Varrios Los Aztecas']
+    ];
+
+    [$emoji, $class, $text] = $factionBadges[$user['faction_id']];
+
+    echo "<span class='badge $class'>$emoji $text</span>";
 }
 ?>
 

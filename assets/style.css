@@ -220,50 +220,98 @@ body {
 
 .badge.owner {
     border-color: #4000ff;
-    box-shadow: 0 0 10px rgba(255, 71, 87, 0.4);
+    box-shadow: 0 0 10px rgb(89, 0, 255);
 }
 
 .badge.developer {
     border-color: #f700ff;
-    box-shadow: 0 0 10px rgba(155, 89, 182, 0.4);
+    box-shadow: 0 0 10px rgb(255, 0, 221);
 }
 
 .badge.manager {
-    border-color: #f1c40f;
-    box-shadow: 0 0 10px rgba(241, 196, 15, 0.4);
+    border-color: #ff0004;
+    box-shadow: 0 0 10px rgb(255, 0, 0);
 }
 
 .badge.headstaff {
-    border-color: #e67e22;
-    box-shadow: 0 0 10px rgba(230, 126, 34, 0.4);
+    border-color: #00c6ff;
+    box-shadow: 0 0 10px rgb(0, 238, 255);
 }
 
 .badge.admin {
-    border-color: #3498db;
-    box-shadow: 0 0 10px rgba(52, 152, 219, 0.4);
+    border-color: #fcff00;
+    box-shadow: 0 0 10px rgb(229, 255, 0);
 }
 
 .badge.moderator {
-    border-color: #1abc9c;
-    box-shadow: 0 0 10px rgba(26, 188, 156, 0.4);
+    border-color: #0081ff;
+    box-shadow: 0 0 10px rgba(0, 132, 255, 0.938);
 }
 
 .badge.trialadmin {
-    border-color: #95a5a6;
-    box-shadow: 0 0 10px rgba(149, 165, 166, 0.4);
+    border-color: #ccff00;
+    box-shadow: 0 0 10px rgb(186, 238, 0);
 }
 
 /* ===== HELPER ===== */
 
+.badge.headhelper {
+    border-color: #00ff0d;
+    box-shadow: 0 0 10px rgba(0, 255, 106, 0.4);
+}
+
 .badge.helper {
-    border-color: #2ecc71;
-    box-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
+    border-color: #0a880c;
+    box-shadow: 0 0 10px rgba(0, 255, 106, 0.4);
+}
+
+.badge.trialhelper {
+    border-color: #9af279;
+    box-shadow: 0 0 10px rgba(0, 255, 106, 0.4);
 }
 
 /* ===== FACTION LEADER ===== */
 
-.badge.leader {
-    border-color: #e84393;
-    box-shadow: 0 0 10px rgba(232, 67, 147, 0.4);
+/* ===== FACTION LEADER BADGES ===== */
+
+.badge.lspd {
+    border-color: #0099ff;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.45);
 }
+
+.badge.sheriff {
+    border-color: #10471e;
+    box-shadow: 0 0 10px rgba(13, 87, 29, 0.45);
+}
+
+.badge.pfd {
+    border-color: #eb6859;
+    box-shadow: 0 0 10px rgba(231, 76, 60, 0.45);
+}
+
+.badge.hitman {
+    border-color: #ff0000;
+    box-shadow: 0 0 10px rgba(155, 89, 182, 0.45);
+}
+
+.badge.grove {
+    border-color: #088303;
+    box-shadow: 0 0 10px rgba(46, 204, 113, 0.45);
+}
+
+.badge.ballas {
+    border-color: #8e44ad;
+    box-shadow: 0 0 10px rgba(142, 68, 173, 0.45);
+}
+
+.badge.vagos {
+    border-color: #fbff00;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.45);
+}
+
+.badge.aztecas {
+    border-color: #00ffd5;
+    box-shadow: 0 0 10px rgba(41, 128, 185, 0.45);
+}
+
 
