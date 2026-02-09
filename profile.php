@@ -7,85 +7,85 @@ if (!isset($_SESSION['discord_id'])) {
     exit;
 }
 
+/* FETCH USER */
 $q = $conn->prepare("SELECT * FROM users WHERE discord_id=?");
 $q->bind_param("s", $_SESSION['discord_id']);
 $q->execute();
 $user = $q->get_result()->fetch_assoc();
+
+/* ======================
+   MANAGE ACTIONS
+====================== */
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $user['admin_level'] >= 4) {
+
+    $action = $_POST['action'] ?? '';
+    $reason = trim($_POST['reason'] ?? '');
+
+    if ($reason === '') {
+        header("Location: profile.php");
+        exit;
+    }
+
+    $staffName  = $user['username'];
+    $staffLevel = $user['admin_level'];
+    $targetId   = $user['id'];
+    $targetName = $user['username'];
+
+    /* MAKE LEADER (NO STAFF LOG) */
+    if ($action === 'make_leader') {
+        $faction = (int)$_POST['faction_id'];
+
+        $conn->query("
+            UPDATE users 
+            SET faction_id=$faction, faction_rank=7 
+            WHERE id=$targetId
+        ");
+    }
+
+    /* UNINVITE LEADER (NO STAFF LOG) */
+    if ($action === 'uninvite') {
+        $conn->query("
+            UPDATE users 
+            SET faction_id=0, faction_rank=0 
+            WHERE id=$targetId
+        ");
+    }
+
+    /* MAKE HELPER */
+    if ($action === 'make_helper' && $staffLevel >= 5) {
+        $lvl = (int)$_POST['helper_level'];
+
+        $conn->query("UPDATE users SET helper_level=$lvl WHERE id=$targetId");
+
+        $conn->query("
+            INSERT INTO staff_logs
+            (staff_name, staff_admin_level, target_name, type, new_level, reason)
+            VALUES
+            ('$staffName', $staffLevel, '$targetName', 'helper', $lvl, '$reason')
+        ");
+    }
+
+    /* MAKE ADMIN */
+    if ($action === 'make_admin' && $staffLevel >= 5) {
+        $lvl = (int)$_POST['admin_level'];
+
+        if ($staffLevel == 5 && $lvl > 2) {
+            header("Location: profile.php");
+            exit;
+        }
+
+        $conn->query("UPDATE users SET admin_level=$lvl WHERE id=$targetId");
+
+        $conn->query("
+            INSERT INTO staff_logs
+            (staff_name, staff_admin_level, target_name, type, new_level, reason)
+            VALUES
+            ('$staffName', $staffLevel, '$targetName', 'admin', $lvl, '$reason')
+        ");
+    }
+
+    header("Location: profile.php");
+    exit;
+}
 ?>
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile - <?= $user['username'] ?></title>
-    <link rel="stylesheet" href="assets/style.css">
-</head>
-<body>
-
-<?php include 'navbar.php'; ?>
-
-<div class="profile-container">
-
-    <div class="profile-card">
-        <img class="profile-avatar"
-             src="https://cdn.discordapp.com/avatars/<?= $user['discord_id'] ?>/<?= $user['avatar'] ?>.png">
-
-        <h2 class="profile-name"><?= $user['username'] ?></h2>
-
-<div class="badges">
-
-<?php
-/* ADMIN */
-if ($user['admin_level'] > 0) {
-    $adminBadges = [
-        7 => ['👑', 'Owner', 'owner'],
-        6 => ['🛠', 'Developer', 'developer'],
-        5 => ['🧠', 'Manager', 'manager'],
-        4 => ['🛡', 'Head Staff', 'headstaff'],
-        3 => ['🛡', 'Admin', 'admin'],
-        2 => ['🛡', 'Moderator', 'moderator'],
-        1 => ['🧪', 'Trial Admin', 'trialadmin']
-    ];
-
-    [$emoji, $text, $class] = $adminBadges[$user['admin_level']];
-    echo "<span class='badge $class'>$emoji $text</span>";
-}
-
-/* HELPER */
-if ($user['helper_level'] > 0) {
-    $helperBadges = [
-        3 => ['🧑‍🏫', 'Head Helper', 'headhelper'],
-        2 => ['🧑‍🏫', 'Helper', 'helper'],
-        1 => ['🧪', 'Trial Helper', 'trialhelper']
-    ];
-
-    [$emoji, $text, $class] = $helperBadges[$user['helper_level']];
-    echo "<span class='badge $class'>$emoji $text</span>";
-}
-
-/* LEADER */
-if ($user['faction_rank'] == 7) {
-    $factionBadges = [
-        1 => ['🚓', 'lspd', 'Leader of Los Santos Police Department'],
-        2 => ['⭐', 'sheriff', 'Leader of Sheriff Department'],
-        3 => ['🚑', 'pfd', 'Leader of Paramedic & Fire Department'],
-        4 => ['🎯', 'hitman', 'Leader of Hitman Agency'],
-        5 => ['🍀', 'grove', 'Leader of Grove Street Families'],
-        6 => ['💜', 'ballas', 'Leader of Ballas'],
-        7 => ['💛', 'vagos', 'Leader of Los Santos Vagos'],
-        8 => ['🔵', 'aztecas', 'Leader of Varrios Los Aztecas']
-    ];
-
-    [$emoji, $class, $text] = $factionBadges[$user['faction_id']];
-
-    echo "<span class='badge $class'>$emoji $text</span>";
-}
-?>
-
-</div>
-
-    </div>
-
-</div>
-
-</body>
-</html>
